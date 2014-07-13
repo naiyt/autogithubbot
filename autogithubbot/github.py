@@ -1,6 +1,12 @@
 from apihelper import Api
 import secret as s
 
+class BadUser(Exception):
+	pass
+
+class BadRepo(Exception):
+	pass
+
 class GitHub:
 	def __init__(self):
 		self.api = Api('https://api.github.com',
@@ -9,10 +15,14 @@ class GitHub:
 
 	def repo(self, username, repo):
 		info = self.api.get('/repos/{}/{}'.format(username, repo))
+		if info.status_code != 200:
+			raise BadRepo('Repo {} does not exist'.format(repo))
 		return Repo(info.json())
 
 	def user(self, username):
 		info = self.api.get('/users/{}'.format(username))
+		if info.status_code != 200:
+			raise BadUser('User {} does not exist'.format(username))
 		return User(info.json())
 
 class Repo:

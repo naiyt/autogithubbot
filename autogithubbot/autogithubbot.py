@@ -10,6 +10,7 @@ def main():
 		s.user,
 		s.password,
 		'redditreplier',
+		debug=True
 	)
 	print(bot.start())
 
