@@ -1,4 +1,4 @@
 redditreplier
 *.pyc
 __pycache__
-secrets.py
+secret.py
