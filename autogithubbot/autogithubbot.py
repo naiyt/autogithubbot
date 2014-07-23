@@ -1,18 +1,19 @@
 from redditreplier import Replier
-from parser import parser
-from replier import replier
+from parser import Parser
 import secret as s
+import warnings
 
 def main():
-	bot = Replier(
-		parser,
-		replier,
-		s.user,
-		s.password,
-		'redditreplier',
-		debug=True
-	)
-	print(bot.start())
+    bot = Replier(
+        Parser(),
+        s.user,
+        s.password,
+        'all',
+        debug=True
+    )
+    bot.start()
 
 if __name__ == '__main__':
-	main()
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        main()
